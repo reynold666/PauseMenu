@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://play_area.gd" type="Script" id=1]
+[ext_resource path="res://player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://grey.png" type="Texture" id=3]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.480447, 1 )
+colors = PoolColorArray( 0.176471, 0.564706, 1, 1, 0.219608, 0.294118, 0.262745, 1, 0.0747681, 0.0976562, 0.0837088, 1 )
+
+[sub_resource type="GradientTexture2D" id=1]
+gradient = SubResource( 2 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+[node name="Root" type="Node2D"]
+
+[node name="MainCamera" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="PlayArea" type="Sprite" parent="."]
+scale = Vector2( 16, 9.375 )
+texture = SubResource( 1 )
+centered = false
+script = ExtResource( 1 )
+ceiling_y = 0.4
+min_persp_scaling = 0.75
+max_persp_scaling = 1.75
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 428, 402 )
+play_area_path = NodePath("../PlayArea")
+
+[node name="Obstacle" type="Sprite" parent="."]
+position = Vector2( 658, 416 )
+scale = Vector2( 0.48, 0.56 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Obstacle"]
+scale = Vector2( 11.36, 6.36 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Obstacle/StaticBody2D"]
+position = Vector2( 0, 4.77313 )
+scale = Vector2( 1, 0.0900617 )
+shape = SubResource( 4 )

@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://background.jpg" type="Texture" id=1]
+[ext_resource path="res://blue.png" type="Texture" id=2]
+[ext_resource path="res://player_3d.gd" type="Script" id=3]
+[ext_resource path="res://red.jpg" type="Texture" id=4]
+[ext_resource path="res://black.png" type="Texture" id=5]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 1.25, 1, 1 )
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.203509, 0.25, 0.204295 )
+
+[node name="Root" type="Spatial"]
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.15, 0, 5.09 )
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite3D" parent="Player"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 1.37413, 0 )
+texture = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite3D" parent="Player/Sprite"]
+transform = Transform( 0.27647, 0, 0, 0, -2.18557e-08, -2, 0, 0.0990306, -1.73151e-08, 0, -2.56131, -0.865001 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 3 )
+
+[node name="Enemy" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.362, 0, 1.505 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Enemy"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite3D" parent="Enemy"]
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 1, 0 )
+texture = ExtResource( 4 )
+
+[node name="Ground" type="StaticBody" parent="."]
+transform = Transform( 56, 0, 0, 0, 1.20457, 0, 0, 0, 45.8273, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 0.213135, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="RearLimit" type="StaticBody" parent="."]
+transform = Transform( 56, 0, 0, 0, -2.1557e-08, -16.3765, 0, 1.20457, -1.74846e-06, 0, 2.55319, -8.84938 )
+
+[node name="CollisionShape" type="CollisionShape" parent="RearLimit"]
+transform = Transform( 1, 0, 0, 0, 0.213135, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="FrontLimit" type="StaticBody" parent="."]
+transform = Transform( 56, 0, 0, 0, -2.1557e-08, -16.3765, 0, 1.20457, -1.74846e-06, 0, 2.55319, 9.31706 )
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontLimit"]
+transform = Transform( 1, 0, 0, 0, 0.213135, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="LeftLimit" type="StaticBody" parent="."]
+transform = Transform( -2.44784e-06, 1.20457, -7.15839e-07, 0, -5.26535e-08, -16.3765, -46.3866, -4.36146e-08, 2.59188e-14, -11.7043, 2.55319, -0.241917 )
+
+[node name="CollisionShape" type="CollisionShape" parent="LeftLimit"]
+transform = Transform( 1, 0, 0, 0, 0.213135, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="RightLimit" type="StaticBody" parent="."]
+transform = Transform( -2.44784e-06, 1.20457, -7.15839e-07, 0, -5.26535e-08, -16.3765, -46.3866, -4.36146e-08, 2.59188e-14, 11.3934, 2.55319, -0.241917 )
+
+[node name="CollisionShape" type="CollisionShape" parent="RightLimit"]
+transform = Transform( 1, 0, 0, 0, 0.213135, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="MainCamera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.97437, 0.224951, 0, -0.224951, 0.97437, 0.0111332, 5.71911, 8.42867 )
+projection = 1
+fov = 3.54966
+size = 10.7424
+frustum_offset = Vector2( 0, 1 )
+
+[node name="Background" type="Sprite3D" parent="MainCamera"]
+transform = Transform( 0.775912, 0, 0, 0, 0.563109, 0, 0, 0, 1, -0.069, 2.211, -25 )
+texture = ExtResource( 1 )
